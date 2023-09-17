@@ -6,4 +6,4 @@ export const theme = {
         hover_contrast: "#E3E68E",
         contrast: "#ABFF4A"
     }
-}
+};
