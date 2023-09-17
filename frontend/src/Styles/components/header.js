@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
+import { Box } from "../elements/Box";
 import { theme } from "../theme";
 
 export const HeaderContainer = styled.div`
@@ -13,4 +14,13 @@ export const HeaderContainer = styled.div`
     z-index: 30;
     padding: 1rem 0.8rem;
 
+`;
+
+export const BoxHeader = styled(Box)`
+    ${({ variant }) =>
+    variant === "header" &&
+    css`
+        width: 100%;
+        background-color: ${theme.colors.primary.contrast};    
+    `}
 `;

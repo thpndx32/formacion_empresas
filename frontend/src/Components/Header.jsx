@@ -1,13 +1,16 @@
 import {
+    BoxHeader,
     HeaderContainer
 } from "../Styles/components/header.js";
 
 const Header = () => {
     return (
         <>
-            <HeaderContainer>
+            <BoxHeader variant="container">
+                <HeaderContainer>
 
-            </HeaderContainer>
+                </HeaderContainer>
+            </BoxHeader>
         </>
     );
 }
