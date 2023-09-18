@@ -11,6 +11,7 @@ import { Box } from "../Styles/elements/Box.js";
 import { useState } from "react";
 import useClickOutside from "../hooks/useClickOutside.js"
 import Modal from "./Modal.jsx";
+import { FormAccount } from "./FormAccount.jsx";
 
 const Header = () => {
 
@@ -23,6 +24,7 @@ const Header = () => {
     };
 
     const isLogged = "unlogged";
+    const [accountState, setAccountState] = useState("");
     return (
         <>
             <BoxHeader variant="header">
@@ -36,9 +38,11 @@ const Header = () => {
                         {isLogged === "unlogged" && (
                             <Actions>
                                 <Button variant="btn_access" destined="register" onClick={onFormClick}>
+                                    {setAccountState("register")}
                                     Registrarse
                                 </Button>
                                 <Button variant="btn_access" destined="register" onClick={onFormClick}>
+                                    {setAccountState("login")}
                                     Iniciar sesion
                                 </Button>
                             </Actions>        
@@ -50,8 +54,11 @@ const Header = () => {
                 form && (
                     <Modal>
                         <div>
-                            hola
+                            rata
                         </div>
+                        <FormAccount formRef={formRef} request={accountState}>
+
+                        </FormAccount>
                     </Modal>
                 )
             }
