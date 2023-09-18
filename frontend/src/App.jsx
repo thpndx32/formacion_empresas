@@ -1,10 +1,12 @@
 import logo from './logo.svg';
 import Header from './Components/Header';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 
 function App() {
   return (
     <>
+    <BrowserRouter>
       <Header/>
       <div className="App">
         <header className="App-header">
@@ -22,6 +24,7 @@ function App() {
           </a>
         </header>
       </div>
+      </BrowserRouter>
     </>
   );
 }
