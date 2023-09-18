@@ -1,0 +1,50 @@
+[
+  {
+    "id": 0,
+    "photoURL": "https://i.postimg.cc/7YSxrBRK/prof1.jpg",
+    "nickname": "Jose Miguel",
+    "occupation": "coach",
+    "stars": 5,
+    "reviews": 55
+  },
+  {
+    "id": 1,
+    "nickname": "Esperanza",
+    "photoURL": "https://i.postimg.cc/zDsJMmxL/prof2.jpg",
+    "occupation": "developer",
+    "stars": 3.7,
+    "reviews": 24
+  },
+  {
+    "id": 2,
+    "photoURL": "https://i.postimg.cc/YSp25FR6/8bitpix.png",
+    "nickname": "Luis",
+    "occupation": "coach",
+    "stars": 3.4,
+    "reviews": 34
+  },
+  {
+    "id": 3,
+    "nickname": "Gabriel",
+    "photoURL": "https://i.postimg.cc/NjYQs6qB/prof3.jpg",
+    "occupation": "fotógrafo",
+    "stars": 3.5,
+    "reviews": 22
+  },
+  {
+    "id": 4,
+    "photoURL": "https://i.postimg.cc/WpFNXpwL/prof5.jpg",
+    "nickname": "Arturo",
+    "occupation": "coach",
+    "stars": 4.5,
+    "reviews": 6
+  },
+  {
+    "id": 5,
+    "nickname": "Lucía",
+    "photoURL": "https://i.postimg.cc/JtVdQ5cn/prof4.jpg",
+    "occupation": "developer",
+    "stars": 5,
+    "reviews": 34
+  }
+]
