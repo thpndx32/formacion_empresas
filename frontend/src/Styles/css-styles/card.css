@@ -1,0 +1,96 @@
+@import "colors.css";
+
+:root {
+  --main: #ffda99;
+  --hover_main: #e6c96e;
+  --base: #fbf9eb;
+  --hover_contrast: #e3e68e;
+  --contrast: #abff4a;
+}
+
+.card {
+}
+.card-container {
+  display: flex;
+  align-items: center;
+}
+.card__info-container {
+  padding-left: 1rem;
+  padding-right: 2rem;
+  flex-grow: 1;
+}
+
+.card__nickname {
+  font-size: 1.2rem;
+}
+.card__occupation {
+  font-size: 0.9rem;
+}
+.card__stars {
+  font-size: 0.9rem;
+}
+.card__photo-container {
+	width: 150px;
+  height: 150px;
+	border-radius: 20px;
+	overflow: hidden;
+}
+.card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card__nickname {
+}
+.card__occupation {
+	background-color: #ececec;
+	display: inline;
+	padding: .2rem .6rem;
+	border-radius: 10px;
+
+}
+.card__stars {
+	
+}
+.card__button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+.card__button {
+  cursor: pointer;
+  text-align: center;
+  border: 0;
+  font-size: 1rem;
+  padding: 0.5rem 2rem;
+  border-radius: 20px;
+}
+.card__button--chat {
+  transition: opacity 0.2s;
+  background-color: var(--main);
+}
+.card__button--chat:hover {
+  opacity: 0.6;
+}
+
+.card__button--follow {
+  transition: all 0.2s;
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #333;
+}
+.card__button--follow:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+	.card{
+		/* width: 360px; */
+	}
+  .card__button {
+    font-size: 0.9rem;
+  }
+}
