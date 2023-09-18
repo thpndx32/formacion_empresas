@@ -9,7 +9,7 @@ export const HeaderContainer = styled.div`
     margin: 0 auto;
     display: grid;
     grid-row-gap: 10px;
-    background-color: ${theme.base};
+    background-color: ${theme.main};
     position: relative;
     z-index: 30;
     padding: 1rem 0.8rem;
@@ -58,11 +58,24 @@ export const Brand = styled.img`
   }
 `;
 
+export const Actions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  a {
+    text-decoration: none;
+  }
+
+  @media screen and (min-width: 445px){
+    gap: 20px;
+  }
+`;
+
 export const BoxHeader = styled(Box)`
     ${({ variant }) =>
     variant === "header" &&
     css`
         width: 100%;
-        background-color: ${theme.colors.primary.contrast};    
+        background-color: ${theme.colors.contrast};    
     `}
 `;
