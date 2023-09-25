@@ -2,7 +2,7 @@ header{
     color: white;
     /* background: #37387a; */
     background: #FFDA99;
-    background-image: url('../Images/Header_CommunityEngagement.jpg');
+    background-image: url('../../Images/Header_CommunityEngagement.jpg');
     min-height: 50vh;
     padding-top: 20vh;
     text-align: center;
