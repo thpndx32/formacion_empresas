@@ -12,19 +12,36 @@ import { useState } from "react";
 import useClickOutside from "../hooks/useClickOutside.js"
 import Modal from "./Modal.jsx";
 import { FormAccount } from "./FormAccount.jsx";
+import { useAuthState,useSignOut } from "react-firebase-hooks/auth"
+import { auth } from "../Config/Firebase.js";
 
 const Header = () => {
 
     const [form, setForm] = useState(false);
     const [formRef] = useClickOutside(setForm,form);
-
-    const onFormClick = (e) => {
-        setForm(!form);
-        e.stopPropagation();
-    };
+    const [signOut, loadingSignOut, errorSignOut] = useSignOut(auth);
 
     const isLogged = "unlogged";
-    const [accountState, setAccountState] = useState("");
+    const [user,loadingAuth] = useAuthState(auth);
+    const [accountState,setAccountState] = useState("");
+
+    const onFormClick = (e, state) => {
+        setForm(!form);
+        e.stopPropagation();
+        setAccountState(state);
+        
+    };
+
+    console.log(auth?.currentUser?.email);
+    console.log(user)
+
+    const logOut = async () =>{
+        const success = await signOut();
+        if (success) {
+        alert('You are sign out');
+        }
+    }
+
     return (
         <>
             <BoxHeader variant="header">
@@ -35,29 +52,27 @@ const Header = () => {
                         </NavLink>
                     </Box>
                     <BoxAvatar>
-                        {isLogged === "unlogged" && (
-                            <Actions>
-                                <Button variant="btn_access" destined="register" onClick={onFormClick}>
-                                    {setAccountState("register")}
+                        {
+                            user ? (<Actions>
+                                <Button variant="btn_access" destined="register" onClick={logOut}>
+                                    Cerrar sesion
+                                </Button>
+                            </Actions> ):(<Actions>
+                                <Button variant="btn_access" destined="register" onClick={(e) => onFormClick(e,"signUp")}>
                                     Registrarse
                                 </Button>
-                                <Button variant="btn_access" destined="register" onClick={onFormClick}>
-                                    {setAccountState("login")}
+                                <Button variant="btn_access" destined="register" onClick={(e) => onFormClick(e,"signIn")}>
                                     Iniciar sesion
                                 </Button>
-                            </Actions>        
-                        )}
+                            </Actions> )
+                        }
                     </BoxAvatar>
                 </HeaderContainer>
             </BoxHeader>
             {
                 form && (
                     <Modal>
-                        <div>
-                            rata
-                        </div>
                         <FormAccount formRef={formRef} request={accountState}>
-
                         </FormAccount>
                     </Modal>
                 )
