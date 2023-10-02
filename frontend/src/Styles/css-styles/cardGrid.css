@@ -5,6 +5,22 @@
   margin: 0 auto;
   padding: 1rem;
 }
+.cardGrid__title{
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  position: relative;
+}
+.cardGrid__title::after{
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: #33333336;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+
+}
 .cardGrid-container {
   display: flex;
   flex-direction: column;

@@ -33,11 +33,9 @@ export const FormAccount = ({
     };
 
     const toDo = async (e) => {
-        console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         e.preventDefault();
         try {
             if (request==="signIn"){
-                alert("entrando");
                 await signIn();
             } else if (request==="signUp"){
                 await signUp();
@@ -50,9 +48,11 @@ export const FormAccount = ({
     };
     return  (
         <Formulario variant="primary" ref={formRef} onClick={handleFormClick}>
+            <p className="form__title">{request === "signIn"?
+                "Inicia sesión en tu cuenta" : "Crea una nueva cuenta"}</p>
             <input type="email" name="username" placeholder="Escribe tu nombre de usuario" onChange={(e)=>setEmail(e.target.value)}/>
             <input type="password" name="password" placeholder="Escribe tu contraseña" onChange={(e)=>setPassword(e.target.value)}/>
-            <button type="submit" onClick={toDo}>
+            <button type="submit" onClick={toDo} className="">
                 Ingresar
             </button>
         </Formulario>

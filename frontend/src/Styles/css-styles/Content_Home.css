@@ -1,48 +1,64 @@
-header{
-    color: white;
-    /* background: #37387a; */
-    background: #FFDA99;
-    background-image: url('../../Images/Header_CommunityEngagement.jpg');
-    min-height: 50vh;
-    padding-top: 20vh;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
+.hero {
+  width: 100%;
+  position: relative;
+  top: 65.2px;
+	min-height: 600px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 4rem;
+	outline: 1px solid red;
+}
+.hero__container {
+	position: relative;
+  padding: 1rem;
+  max-width: 1600px;
+  z-index: 10;
+	flex-grow: 1;
+	margin:0 auto;
 }
 
-
-header h1{
-    font-size: 3rem;
-    margin: 0 0 1rem;
-    color:#FFDA99;
-    text-shadow:
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+.hero-background {
+  position: absolute;
+  width: 100%;
+	height: 100%;
+  filter: brightness(0.5);
+}
+.hero-background__img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
-header h2{
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin: 0 0 1rem;
-    color: black;
-    text-shadow:
-    -1px -1px 0 white,
-     1px -1px 0 white,
-    -1px 1px 0 white,
-     1px 1px 0 white;
+.hero__text {
+  color: #fafafae1;
+}
+.hero__title {
+  font-size: 3rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+
+	/* color: #fafafae1; */
+}
+.hero__subtitle {
+  font-size: 1.2rem;
+	margin-bottom: 1rem;
+}
+.hero__register {
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem;
+  /* outline: 1px solid red; */
+  cursor: pointer;
+  border-radius: 5px;
+	background-color: transparent;
+  transition: all 0.2s;
+  font-weight: bold;
+  border: 1px solid #fafafae1;
+  color: #fafafae1;
 }
 
-header p{
-    color: black;
-    text-shadow:
-    -1px -1px 0 white,
-     1px -1px 0 white,
-    -1px 1px 0 white,
-     1px 1px 0 white;
+.hero__register:hover {
+  background-color: #fafafae1;
+  font-weight: bold;
+  color: #333;
 }
