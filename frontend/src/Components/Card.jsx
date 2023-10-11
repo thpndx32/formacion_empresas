@@ -24,7 +24,7 @@ export const Card = ({ profile }) => {
           </p>
         </div>
         <div className="card__button-container">
-          <div className="card__button card__button--chat">Chatear</div>
+          <div className="card__button card__button--chat">Servicios</div>
           <div className="card__button card__button--follow">Seguir</div>
         </div>
       </div>
