@@ -8,6 +8,8 @@ const useClickOutside = (setValue, animation) => {
   const domNode = useRef();
   const anim = useRef(animation)
 
+  console.log(domNode);
+
   const handleOnClose = () => {
     if(anim.current === true){
       elmModal.firstElementChild.classList?.remove('openModal')     
@@ -46,7 +48,7 @@ const useClickOutside = (setValue, animation) => {
         elmModal.firstElementChild.classList.remove('closingModal')
       })          
   }, [animation])
-  
+  console.log(domNode);
   return [domNode, handleOnClose];
 };
 
