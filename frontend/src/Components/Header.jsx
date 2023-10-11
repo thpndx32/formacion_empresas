@@ -8,12 +8,15 @@ import { BoxAvatar } from "../Styles/components/avatar.js";
 import { Button } from "../Styles/elements/Button.js";
 import { NavLink } from "react-router-dom";
 import { Box } from "../Styles/elements/Box.js";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import useClickOutside from "../hooks/useClickOutside.js"
 import Modal from "./Modal.jsx";
 import { FormAccount } from "./FormAccount.jsx";
 import { useAuthState,useSignOut } from "react-firebase-hooks/auth"
 import { auth } from "../Config/Firebase.js";
+import { ProfileBox } from "./ProfileBox.jsx";
+import { ProfileBoxContainer } from "../Styles/components/profileBox.js";
+import { Avatar } from "./Avatar.jsx";
 
 const Header = () => {
 
@@ -25,47 +28,48 @@ const Header = () => {
     const [user,loadingAuth] = useAuthState(auth);
     const [accountState,setAccountState] = useState("");
 
+
+
     const onFormClick = (e, state) => {
         setForm(!form);
         e.stopPropagation();
         setAccountState(state);
         
     };
-
-    console.log(auth?.currentUser?.email);
-    console.log(user)
-
-    const logOut = async () =>{
-        const success = await signOut();
-        if (success) {
-        alert('You are sign out');
-        }
-    }
+    /*console.log(auth?.currentUser?.email);
+    console.log(user)*/
 
     return (
         <>
             <BoxHeader variant="header">
                 <HeaderContainer status={isLogged}>
-                    <Box>
+                    <Box align-items="flex-start">
                         <NavLink to="/">
                             <Brand src="logo_propio.png" alt="imagen logo"/>
                         </NavLink>
                     </Box>
                     <BoxAvatar>
                         {
-                            user ? (<Actions>
-                                <Button variant="btn_access" destined="register" onClick={logOut}>
-                                    Cerrar sesion
-                                </Button>
-                            </Actions> ):(<Actions>
-                                <Button variant="btn_access" destined="register" onClick={(e) => onFormClick(e,"signUp")}>
-                                    Registrarse
-                                </Button>
-                                <Button variant="btn_access" destined="register" onClick={(e) => onFormClick(e,"signIn")}>
-                                    Iniciar sesion
-                                </Button>
-                            </Actions> )
+                            !loadingAuth ? (
+                                <>
+                                        {
+                                    user ? (<Avatar user={user}></Avatar>):(<Actions>
+                                        <Button variant="btn_access" destined="register" onClick={(e) => onFormClick(e,"signUp")}>
+                                            Registrarse
+                                        </Button>
+                                        <Button variant="btn_access" destined="register" onClick={(e) => onFormClick(e,"signIn")}>
+                                            Iniciar sesion
+                                        </Button>
+                                    </Actions> )
+                                }
+                                </>
+                            ) :
+
+                            <>
+                                cargando
+                            </>
                         }
+                        
                     </BoxAvatar>
                 </HeaderContainer>
             </BoxHeader>

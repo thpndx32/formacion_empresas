@@ -9,7 +9,7 @@ export const HeaderContainer = styled.div`
     margin: 0 auto;
     display: grid;
     grid-row-gap: 10px;
-    background-color: ${theme.main};
+    background-color: ${theme.colors.base};
     position: relative;
     z-index: 30;
     padding: 1rem 0.8rem;

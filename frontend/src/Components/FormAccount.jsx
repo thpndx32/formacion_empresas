@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateCurrentUser, updateProfile } from "firebase/auth";
 import { Formulario } from "../Styles/components/form";
 import { auth } from "../Config/Firebase";
 
@@ -9,6 +9,7 @@ export const FormAccount = ({
 }) => {
 
     const [email,setEmail] = useState("");
+    const [user,setUser] = useState("");
     const [password,setPassword] = useState("");
     console.log(request);
 
@@ -19,6 +20,7 @@ export const FormAccount = ({
     const signUp = async () => {
         try{
             await createUserWithEmailAndPassword(auth, email, password);
+            await updateProfile(auth.currentUser, {displayName: user}).catch((err)=> console.error(err));
         }catch(err){
             console.error(err);
         }
@@ -33,11 +35,9 @@ export const FormAccount = ({
     };
 
     const toDo = async (e) => {
-        console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         e.preventDefault();
         try {
             if (request==="signIn"){
-                alert("entrando");
                 await signIn();
             } else if (request==="signUp"){
                 await signUp();
@@ -49,9 +49,20 @@ export const FormAccount = ({
         }
     };
     return  (
-        <Formulario variant="primary" ref={formRef} onClick={handleFormClick}>
-            <input type="email" name="username" placeholder="Escribe tu nombre de usuario" onChange={(e)=>setEmail(e.target.value)}/>
-            <input type="password" name="password" placeholder="Escribe tu contraseña" onChange={(e)=>setPassword(e.target.value)}/>
+        <Formulario variant="primary" ref={formRef} onClick={handleFormClick}>{
+            request === "signIn" ? 
+            <>
+                <input type="email" name="email" placeholder="Escribe tu correo" onChange={(e)=>setEmail(e.target.value)}/>
+                <input type="password" name="password" placeholder="Escribe tu contraseña" onChange={(e)=>setPassword(e.target.value)}/>
+            </>
+            :
+            <>
+                <input type="email" name="username" placeholder="Escribe tu correo" onChange={(e)=>setEmail(e.target.value)}/>
+                <input type="text" name="username" placeholder="Escribe tu nombre de usuario" onChange={(e)=>setUser(e.target.value)}/>
+                <input type="password" name="password" placeholder="Escribe tu contraseña" onChange={(e)=>setPassword(e.target.value)}/>
+            </>
+        }
+            
             <button type="submit" onClick={toDo}>
                 Ingresar
             </button>
