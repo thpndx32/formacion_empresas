@@ -1,5 +1,9 @@
 .footer {
   background-color: #333;
+  margin-top: auto;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }
 .footer-container {
 	padding: 1rem;

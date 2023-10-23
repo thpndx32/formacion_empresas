@@ -6,32 +6,56 @@ import {
 } from "../Styles/components/header.js";
 import { BoxAvatar } from "../Styles/components/avatar.js";
 import { Button } from "../Styles/elements/Button.js";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Box } from "../Styles/elements/Box.js";
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import useClickOutside from "../hooks/useClickOutside.js"
 import Modal from "./Modal.jsx";
 import { FormAccount } from "./FormAccount.jsx";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
-import { auth } from "../Config/Firebase.js";
+import { auth, db } from "../Config/Firebase.js";
 import "../Styles/css-styles/header.css";
 import { ProfileBox } from "./ProfileBox.jsx";
 import { ProfileBoxContainer } from "../Styles/components/profileBox.js";
 import { Avatar } from "./Avatar.jsx";
 
 import React from "react";
+import { collection, doc, getDoc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
+import { AuthContext } from "../App.jsx";
 
 export const Header = () => {
   const [form, setForm] = useState(false);
   const [formRef] = useClickOutside(setForm, form);
   const [signOut, loadingSignOut, errorSignOut] = useSignOut(auth);
-
-    const isLogged = "unlogged";
-    const [user,loadingAuth] = useAuthState(auth);
+  const [user,loadingUsr] = useContext(AuthContext);
     const [accountState,setAccountState] = useState("");
+    const [data, setData] = useState();
 
+    const logOut = async () =>{
+                 const success = await signOut();
+                 if (success) {
+            alert('You are sign out');
+            }
+        }
 
-
+    const registerTalent = async () => {
+      const docRef = doc(db,`Usuario/${user?.uid}`);
+      await updateDoc(docRef,{
+        talento: true
+      });
+    }
+    useEffect(()=>{
+      const unsub = onSnapshot(query(collection(db,`Usuario`),where("correo","==",`${user?.email}`)), (snapshot) => {
+        snapshot.docChanges().forEach((change)=>{
+          snapshot.docs.map((doc)=> {
+            setData(doc.data());
+            //console.log(doc.data().correo);
+          });
+        })
+      })
+    },[user]);
+    
+    console.log("Unsub",data?.talento);
     const onFormClick = (e, state) => {
         setForm(!form);
         e.stopPropagation();
@@ -45,12 +69,22 @@ export const Header = () => {
     <>
       <nav className="nav">
         <div className="nav-container">
-          <a className="nav__logo">| Llamkay</a>
-          <ul className="nav__link-list">
-            {user ? (
-              <li className="nav__list-item nav__list-item--register">
-                <a className="nav__link">Cerrar Sesión</a>
-              </li>
+          <Link to={"/"} className="nav__logo">| Llamkay</Link>
+          <ul className="nav__link-list">{
+            !loadingUsr ? <>
+            {data&&(user ? (
+                <>
+                    <li className="nav__list-item nav__list-item--register" onClick={logOut}>
+                        <a className="nav__link">Cerrar Sesión</a>
+                    </li>
+                    { !data?.talento &&
+                      <li className="nav__list-item nav__list-item--register" onClick={registerTalent}>
+                      <a className="nav__link">Registrarse como talento</a>
+                      </li>
+                    }
+                    <Avatar data={data}></Avatar>  
+                </>
+              
             ) : (
               <>
                 <li className="nav__list-item nav__list-item--login" onClick={(e) => onFormClick(e,"signIn")}>
@@ -60,7 +94,12 @@ export const Header = () => {
                   <a className="nav__link">Únete</a>
                 </li>
               </>
-            )}
+            ))}
+                </>:
+                <>
+                    cargando
+                </>
+            }
           </ul>
         </div>
       </nav>

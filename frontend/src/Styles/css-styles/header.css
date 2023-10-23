@@ -42,6 +42,8 @@
 .nav__list-item--login {
 }
 .nav__list-item--register {
+  display: inline-block;
+  white-space: nowrap;
   background-color: transparent;
   transition: all 0.2s;
   font-weight: bold;

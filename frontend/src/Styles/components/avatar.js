@@ -39,21 +39,26 @@ export const BoxAvatar = styled(Box)`
       width: 220px;
       flex-direction: column;
       position: absolute;
-      top: 70px;
-      right: 70px;
+      top: 50px;
+      right: 50px;
       padding: 0;
       z-index: 100;
       height: auto;
       border-radius: 10px 0 10px 10px;
-      border: 1px solid #a400cd;
-      color: ${theme.colors.main};
-      background-color:${theme.colors.contrast}};
+      border: 1px solid #2a3e96;
+      color: #2a3e96;
+      font-weight: bold;
+      background-color:white};
 
-      img {
+      & > img {
         width: 22px;
         position: absolute;
         top: -17px;
         right: 0;
+      }
+
+      & > ul {
+        cursor: pointer;
       }
 
       @media screen and (min-width: 1024px) {

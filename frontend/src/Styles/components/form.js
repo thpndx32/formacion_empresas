@@ -9,7 +9,7 @@ export const Formulario = styled.form`
     max-width: 600px;
     margin: 0 auto;
     padding: 1rem;
-    background-color: ${theme.colors.contrast};
+    background-color: #2a3e96;
     border-radius: 10px;
 
     & > div:first-child {
