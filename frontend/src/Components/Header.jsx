@@ -18,6 +18,7 @@ import "../Styles/css-styles/header.css";
 import { ProfileBox } from "./ProfileBox.jsx";
 import { ProfileBoxContainer } from "../Styles/components/profileBox.js";
 import { Avatar } from "./Avatar.jsx";
+import { useCollection } from 'react-firebase-hooks/firestore'
 
 import React from "react";
 import { collection, doc, getDoc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
@@ -44,16 +45,14 @@ export const Header = () => {
         talento: true
       });
     }
+
+    const q = query(collection(db,'Usuario'),where("correo","==",`${user?.email}`));
+    const [value,loadingVal, errorVal] = useCollection(q);
+    console.log("query",value);
     useEffect(()=>{
-      const unsub = onSnapshot(query(collection(db,`Usuario`),where("correo","==",`${user?.email}`)), (snapshot) => {
-        snapshot.docChanges().forEach((change)=>{
-          snapshot.docs.map((doc)=> {
-            setData(doc.data());
-            //console.log(doc.data().correo);
-          });
-        })
-      })
-    },[user]);
+      console.log("query1",value);
+      setData(value?.docs[0]?.data());
+    },[value]);
     
     console.log("Unsub",data?.talento);
     const onFormClick = (e, state) => {
@@ -72,7 +71,7 @@ export const Header = () => {
           <Link to={"/"} className="nav__logo">| Llamkay</Link>
           <ul className="nav__link-list">{
             !loadingUsr ? <>
-            {data&&(user ? (
+            {!loadingVal&&(user ? (
                 <>
                     <li className="nav__list-item nav__list-item--register" onClick={logOut}>
                         <a className="nav__link">Cerrar Sesión</a>
