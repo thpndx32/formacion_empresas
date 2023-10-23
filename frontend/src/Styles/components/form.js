@@ -2,14 +2,14 @@ import { theme } from "../theme";
 import styled, {css} from "styled-components";
 
 export const Formulario = styled.form`
-    z-index: 10000000;
+    z-index: 10;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
-    padding: 16px;
-    background-color: ${theme.colors.contrast};
+    padding: 1rem;
+    background-color: #2a3e96;
     border-radius: 10px;
 
     & > div:first-child {
@@ -24,8 +24,9 @@ export const Formulario = styled.form`
     ${(props) =>
         props.variant === "primary" &&
         css`
-            min-width: 280px;
-            max-width: 350px;
+            // min-width: 280px;
+            // max-width: 350px;
+            width:400px;
             display: flex;
             flex-direction: column;
             align-items: center;

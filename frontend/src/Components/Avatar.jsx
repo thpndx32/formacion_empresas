@@ -1,18 +1,21 @@
 import { useSignOut } from "react-firebase-hooks/auth";
 import { ProfileBoxContainer } from "../Styles/components/profileBox"
 import { Button } from "../Styles/elements/Button"
-import { useCallback, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { auth } from "../Config/Firebase";
 import useClickOutside from "../hooks/useClickOutside";
 import { Box } from "../Styles/elements/Box";
 import { BoxAvatar } from "../Styles/components/avatar";
 import { ProfileBox } from "./ProfileBox";
 import { Actions } from "../Styles/components/header";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../App";
 
 export const Avatar = (
-    user,
+    {
+    data}
 ) => {
-
+    const [user] = useContext(AuthContext);
     const [signOut, loadingSignOut, errorSignOut] = useSignOut(auth);
     
     const [menuProfile, setMenuProfile] = useState(false);
@@ -20,12 +23,13 @@ export const Avatar = (
     
 
     const onMenuProfile = useCallback((e)=>{
+        handleClick(e);
         console.log(menuRef.current);
         if(menuRef.current?.contains(e.target)){
             setMenuProfile(!menuProfile);
             console.log("hi");
         }
-        console.log(menuProfile);
+        console.log("propagation",menuProfile);
     },[menuProfile]);
 
     const logOut = async () =>{
@@ -35,39 +39,38 @@ export const Avatar = (
         }
     }
 
+    const handleClick = (e) => {
+        e.stopPropagation();
+    };
     return (
         <BoxAvatar variant="avatar">
-            <BoxAvatar variant="avatar_elements">
-            <Button variant="btn_access" destined="register" onClick={logOut}>
-                Cerrar sesion
-            </Button>
-            <ProfileBoxContainer ref={menuRef} onClick={onMenuProfile}>
-                <div>{user.user.displayName}</div>
+            <BoxAvatar variant="avatar_elements" ref={menuRef} onClick={onMenuProfile}>
+            <ProfileBoxContainer>
+                <div>{user?.displayName}</div>
             </ProfileBoxContainer>
             <Box gap="10px">
             {menuProfile && (
-                <>
-                    <BoxAvatar variant="modal_options">
+                    <BoxAvatar variant="modal_options" onClick={handleClick}>
                     <ul>
-                        <div>
-                            hola
-                        </div>   
-                        <div>
-                            hola
-                        </div>  
-                        <div>
-                            hola
-                        </div>  
-                        <div>
-                            hola
-                        </div>  
-                        <div>
-                            hola
-                        </div>  
+                        <Link to={"/perfil"}>
+                            <li>
+                                Perfil Usuario
+                            </li>
+                        </Link>
+                        {
+                            data?.talento && (
+                                <Link to={"/perfilTalento"}>
+                                    <li>
+                                    Perfil Talento
+                                    </li>  
+                                </Link>
+                            )
+                        }
+                        <li>
+                            Historial de pedidos
+                        </li>
                     </ul>
                     </BoxAvatar>
-                    
-                </>
             )}
             </Box>
             

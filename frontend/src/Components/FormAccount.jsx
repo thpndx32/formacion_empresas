@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateCurrentUser, updateProfile } from "firebase/auth";
 import { Formulario } from "../Styles/components/form";
-import { auth } from "../Config/Firebase";
+import { auth, db } from "../Config/Firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export const FormAccount = ({
     formRef,
@@ -19,8 +20,12 @@ export const FormAccount = ({
 
     const signUp = async () => {
         try{
-            await createUserWithEmailAndPassword(auth, email, password);
+            const usr = await createUserWithEmailAndPassword(auth, email, password).then((usrFireBase)=>{
+                return usrFireBase;
+            });
             await updateProfile(auth.currentUser, {displayName: user}).catch((err)=> console.error(err));
+            const docuRef = doc(db,`Usuario/${usr.user.uid}`);
+            setDoc(docuRef, {correo: email, talento: false});
         }catch(err){
             console.error(err);
         }
