@@ -26,7 +26,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/' element={
-              <Home/>
+              <Perfil/>
           }>
           </Route>
           <Route element={<PrivateRoutes/>}>
