@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
-import { db } from "../Config/Firebase";
+import { firestore } from "../Config/Firebase";
 import "../Styles/css-styles/profile_talent.css"
 
 export const PerfilTalento = () => {
@@ -10,7 +10,7 @@ export const PerfilTalento = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const docRef = doc(db, "Usuario", userId); // accedemos a 'Usuario' y el documento con el 'userId'
+      const docRef = doc(firestore, "Usuario", userId); // accedemos a 'Usuario' y el documento con el 'userId'
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {

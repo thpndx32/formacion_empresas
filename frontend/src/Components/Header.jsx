@@ -13,7 +13,7 @@ import useClickOutside from "../hooks/useClickOutside.js"
 import Modal from "./Modal.jsx";
 import { FormAccount } from "./FormAccount.jsx";
 import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
-import { auth, db } from "../Config/Firebase.js";
+import { auth, firestore } from "../Config/Firebase.js";
 import "../Styles/css-styles/header.css";
 import { ProfileBox } from "./ProfileBox.jsx";
 import { ProfileBoxContainer } from "../Styles/components/profileBox.js";
@@ -40,13 +40,13 @@ export const Header = () => {
         }
 
     const registerTalent = async () => {
-      const docRef = doc(db,`Usuario/${user?.uid}`);
+      const docRef = doc(firestore,`Usuario/${user?.uid}`);
       await updateDoc(docRef,{
         talento: true
       });
     }
 
-    const q = query(collection(db,'Usuario'),where("correo","==",`${user?.email}`));
+    const q = query(collection(firestore,'Usuario'),where("correo","==",`${user?.email}`));
     const [value,loadingVal, errorVal] = useCollection(q);
     console.log("query",value);
     useEffect(()=>{

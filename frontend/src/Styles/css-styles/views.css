@@ -2,3 +2,10 @@
     padding-top: 76px;
     position: relative;
 }
+.perfil{
+    padding-top: 76px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

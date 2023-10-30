@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateCurrentUser, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { Formulario } from "../Styles/components/form";
-import { auth, db } from "../Config/Firebase";
+import { auth, firestore } from "../Config/Firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 export const FormAccount = ({
@@ -12,7 +12,7 @@ export const FormAccount = ({
     const [email,setEmail] = useState("");
     const [user,setUser] = useState("");
     const [password,setPassword] = useState("");
-    console.log(request);
+    //console.log(request);
 
     const handleFormClick = (e) => {
         e.stopPropagation();
@@ -24,8 +24,8 @@ export const FormAccount = ({
                 return usrFireBase;
             });
             await updateProfile(auth.currentUser, {displayName: user}).catch((err)=> console.error(err));
-            const docuRef = doc(db,`Usuario/${usr.user.uid}`);
-            setDoc(docuRef, {correo: email, talento: false});
+            const docuRef = doc(firestore,`Usuario/${usr.user.uid}`);
+            setDoc(docuRef, {correo: email, talento: false, username: user ,comms: []});
         }catch(err){
             console.error(err);
         }

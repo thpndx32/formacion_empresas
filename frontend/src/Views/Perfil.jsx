@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../Styles/css-styles/views.css"
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../Config/Firebase";
+import { firestore } from "../Config/Firebase";
 import "../Styles/css-styles/profile_no_talent.css"
 
 export const Perfil = () => {
@@ -10,7 +10,7 @@ export const Perfil = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const docRef = doc(db, "Usuario", userId); 
+      const docRef = doc(firestore, "Usuario", userId); 
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
