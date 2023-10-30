@@ -8,6 +8,7 @@ import FormFotoPerfil from "./FormFotoPerfil";
 import { Datos } from "./Datos";
 
 export const ContenidoPerfil = () =>{
+   
     const [image, setImage] = useState();
     const [user] = useContext(AuthContext);
     const perfilRef = ref(storage, `${user.displayName}/fotoPerfil`);
