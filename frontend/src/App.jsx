@@ -14,6 +14,7 @@ import { PrivateRoutes } from './util/PrivateRoutes';
 import { Home } from './Views/Home';
 import { PerfilTalento } from './Views/PerfilTalento';
 import { Perfil } from './Views/Perfil';
+import { Publicaciones } from './Views/ActivePublications';
 
 export const AuthContext = createContext();
 
@@ -26,7 +27,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/' element={
-              <Home/>
+              <Publicaciones/>
           }>
           </Route>
           <Route element={<PrivateRoutes/>}>

@@ -4,6 +4,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "../Config/Firebase";
 import "../Styles/css-styles/profile_no_talent.css"
 
+
 export const Perfil = () => {
   const [user, setUser] = useState(null);
   const userId = 'aROTvgHvBy9m2js23UuF'; // Juan en firebase
