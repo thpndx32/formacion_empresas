@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../App"; // import your AuthContext
 import "../Styles/css-styles/views.css"
 import { doc, getDoc } from "firebase/firestore";
 import { firestore } from "../Config/Firebase";
 import "../Styles/css-styles/profile_no_talent.css"
 
-
 export const Perfil = () => {
   const [user, setUser] = useState(null);
-  const userId = 'aROTvgHvBy9m2js23UuF'; // Juan en firebase
+  const [currentUser] = useContext(AuthContext); // get the current user from AuthContext
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const docRef = doc(firestore, "Usuario", userId); 
+      const docRef = doc(firestore, "Usuario", currentUser.uid); // use currentUser.uid instead of hardcoded userId
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -22,7 +22,7 @@ export const Perfil = () => {
     };
 
     fetchUserData();
-  }, [userId]);
+  }, [currentUser]); // add currentUser to the dependency array
 
   if (!user) {
     return <div>Loading...</div>;
