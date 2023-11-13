@@ -27,7 +27,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path='/' element={
-              <Publicaciones/>
+            <Home/>
           }>
           </Route>
           <Route element={<PrivateRoutes/>}>
@@ -36,6 +36,9 @@ function App() {
             }></Route>
             <Route path="/perfil" element={
               <Perfil/>
+            }></Route>
+            <Route path="/publicaciones" element={
+              <Publicaciones></Publicaciones>
             }></Route>
           </Route>
         </Routes>

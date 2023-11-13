@@ -45,7 +45,9 @@ export const Publicaciones = () => {
                   </div>
                   <div className="tarjeta__boton-contenedor">
                     <div className="tarjeta__boton tarjeta__boton--chat">Ampliar</div>
-                    <div className="tarjeta__boton tarjeta__boton--seguir">Agendar</div>
+                    <a href={`https://wa.me/51${publicacion.phone}`}>
+                      <div className="tarjeta__boton tarjeta__boton--seguir">Agendar</div>
+                    </a>
                   </div>
                 </div>
               </article>
